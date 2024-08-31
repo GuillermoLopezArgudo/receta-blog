@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';  // Asegúrate de que este archivo existe
+import RecipeListPage from './pages/RecipeListPage';
+import CreateRecipePage from './pages/CreateRecipePage';
+import EditRecipePage from './pages/EditRecipePage';
+import Header from './components/Header';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} /> {/* Asegúrate de que esta ruta esté definida */}
+        <Route path="/recipes" element={<RecipeListPage />} />
+        <Route path="/create-recipe" element={<CreateRecipePage />} />
+        <Route path="/edit-recipe/:id" element={<EditRecipePage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

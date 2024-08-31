@@ -1,0 +1,69 @@
+/* src/components/Header.css */
+.header {
+  background: linear-gradient(90deg, #4a90e2, #0056b3); /* Gradiente azul */
+  padding: 1rem 2rem; /* Espaciado del navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem; /* Espaciado debajo del logo */
+}
+
+.logo {
+  width: 60px; /* Tamaño del logo */
+  height: auto;
+}
+
+.brand-name {
+  font-size: 1.75rem; /* Tamaño de fuente del nombre */
+  font-weight: bold; /* Peso de fuente */
+  margin-left: 0.5rem; /* Espaciado entre el logo y el texto */
+}
+
+.navbar {
+  width: 100%;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center; /* Centra los enlaces de navegación */
+  width: 100%;
+}
+
+.nav-link {
+  font-size: 1rem; /* Tamaño de fuente */
+  color: #ffffff; /* Color blanco para el texto */
+  margin: 0 1rem; /* Espaciado entre los enlaces */
+  padding: 0.5rem 1rem; /* Espaciado interno para el enlace */
+  border-radius: 0.25rem; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Transición de color y fondo */
+}
+
+.nav-link:hover, .nav-link.active {
+  background-color: #ffffff; /* Fondo blanco en hover y activo */
+  color: #0056b3; /* Color azul oscuro para el texto en hover y activo */
+  text-decoration: none; /* Elimina el subrayado en hover */
+}
+
+.navbar-toggler {
+  border: none; /* Elimina el borde del botón de toggler */
+}
+
+.navbar-toggler-icon {
+  background: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>') no-repeat center; /* Icono del toggler */
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column; /* Muestra los enlaces de navegación en columna en pantallas pequeñas */
+    align-items: center; /* Centra los enlaces de navegación */
+  }
+  .nav-link {
+    margin: 0.5rem 0; /* Espaciado entre los enlaces en pantallas pequeñas */
+  }
+}
