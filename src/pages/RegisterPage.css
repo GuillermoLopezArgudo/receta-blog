@@ -1,66 +1,62 @@
-/* src/pages/RegisterPage.css */
-.register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #f7f7f7;
-    padding: 20px;
-  }
-  
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .register-form {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .error-message {
-    color: #d9534f;
-    margin-bottom: 15px;
-  }
-  
-  .submit-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
+.recipe-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.recipe-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.recipe-card p {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.recipe-card ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.recipe-card ul li {
+  list-style-type: disc;
+  color: #333;
+}
+
+.recipe-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipe-actions .btn {
+  flex: 1;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.recipe-actions .btn:last-child {
+  margin-right: 0;
+}

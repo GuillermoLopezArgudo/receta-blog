@@ -1,31 +1,25 @@
-require('dotenv').config(); // Cargar variables de entorno desde .env
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const recipeRoutes = require('./routes/recipes');
-const authRoutes = require('./routes/auth');
+require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Importar rutas
+const userRoutes = require('./routes/users');
+const recipeRoutes = require('./routes/recipes');
+
 // Conectar a la base de datos
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log('Conectado a la base de datos'))
-  .catch(err => console.error('Error al conectar a la base de datos', err));
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
-// Rutas
+// Usar rutas
+app.use('/api/users', userRoutes);
 app.use('/api/recipes', recipeRoutes);
-app.use('/api/auth', authRoutes);
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor en funcionamiento en el puerto ${PORT}`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
 });
