@@ -13,16 +13,16 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-        try {
-          const { data } = await axios.get('http://localhost:5000/api/users/me', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-          });
-          setUser(data);
-          setEmail(data.email);
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      };     
+      try {
+        const { data } = await axios.get('http://localhost:5000/api/users/me', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        setUser(data);
+        setEmail(data.email);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
     fetchUserData();
   }, []);
 
@@ -35,21 +35,39 @@ const ProfilePage = () => {
       alert('Email updated successfully');
       setEmail(newEmail);
     } catch (error) {
-      console.error('Error updating email:', error);
+      console.error('Error updating email:', error.response?.data?.message || error.message);
     }
   };
 
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
+  
+    // Verifica que ambas contraseñas estén presentes
+    if (!password || !newPassword) {
+      alert('Both current and new passwords are required.');
+      return;
+    }
+  
     try {
-      await axios.put('http://localhost:5000/api/users/me/password', { password: newPassword }, {
+      // Enviar solicitud para actualizar la contraseña
+      const response = await axios.put('http://localhost:5000/api/users/me/password', {
+        password, 
+        newPassword
+      }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
-      alert('Password updated successfully');
+  
+      alert(response.data.message);
+      setPassword(''); // Limpiar el campo de la contraseña actual
+      setNewPassword(''); // Limpiar el campo de la nueva contraseña
     } catch (error) {
-      console.error('Error updating password:', error);
+      console.error('Error updating password:', error.response?.data?.message || error.message);
+      alert('Failed to update password: ' + (error.response?.data?.message || error.message));
     }
   };
+  
+  
+  
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -79,6 +97,15 @@ const ProfilePage = () => {
         </form>
         <h2>Cambiar Contraseña</h2>
         <form onSubmit={handleUpdatePassword}>
+          <div className="form-group">
+            <label>Contraseña Actual:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
           <div className="form-group">
             <label>Nueva Contraseña:</label>
             <input

@@ -1,70 +1,74 @@
+/* src/pages/ProfilePage.css */
 .profile-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  .profile-container h1 {
-    margin-bottom: 20px;
-  }
-  
-  .profile-info {
-    margin-bottom: 20px;
-  }
-  
-  .profile-info p {
-    font-size: 18px;
-  }
-  
-  .profile-actions {
-    margin-bottom: 20px;
-  }
-  
-  .profile-actions h2 {
-    margin-bottom: 10px;
-  }
-  
-  .profile-actions .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .profile-actions .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .profile-actions .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-  }
-  
-  .profile-actions .btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  .profile-actions .btn-primary {
-    background-color: #007bff;
-    border: none;
-  }
-  
-  .profile-actions .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  .profile-actions .btn-danger {
-    background-color: #dc3545;
-    border: none;
-  }
-  
-  .profile-actions .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f4f4f4;
+}
+
+.profile-info {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.profile-actions {
+  width: 100%;
+  max-width: 500px;
+}
+
+.profile-actions h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}

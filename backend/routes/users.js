@@ -16,7 +16,7 @@ router.get('/me', authenticateToken, async (req, res) => {
   }
 });
 
-// Actualizar perfil del usuario
+// Actualizar perfil del usuario (incluye email y contraseña)
 router.put('/me', authenticateToken, async (req, res) => {
   const { email, password, newPassword } = req.body;
 
@@ -40,24 +40,69 @@ router.put('/me', authenticateToken, async (req, res) => {
   }
 });
 
+// Actualizar solo el correo electrónico
+router.put('/me/email', authenticateToken, async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.email = email;
+    await user.save();
+
+    res.json({ message: 'Email updated successfully', user });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.put('/me/password', authenticateToken, async (req, res) => {
+  const { password, newPassword } = req.body;
+
+  try {
+    // Verificar que ambas contraseñas están presentes
+    if (!password || !newPassword) {
+      return res.status(400).json({ message: 'Both current and new passwords are required' });
+    }
+
+    // Encontrar al usuario en la base de datos
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Comparar la contraseña actual proporcionada con la almacenada
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: 'Current password is incorrect' });
+
+    // Hashear la nueva contraseña y guardarla
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+
+    res.json({ message: 'Password updated successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
+
 // Login
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-  
-    try {
-      const user = await User.findOne({ email });
-      if (!user) return res.status(400).json({ message: 'Invalid email or password' });
-  
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
-  
-      const token = jwt.sign({ _id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  });
-  
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: 'Invalid email or password' });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
+
+    const token = jwt.sign({ _id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 // Registro
 router.post('/register', async (req, res) => {
